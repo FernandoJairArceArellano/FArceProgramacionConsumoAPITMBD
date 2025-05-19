@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Peliculas</title>
+</head>
+
+<body layout:fragment="body" class="bg-light">
+    <div class="container mt-4">
+        <h1 class="mb-4">Películas Populares</h1>
+        <div class="row">
+            <!-- Recorre las películas recibidas desde el backend -->
+            <div class="col-md-3 mb-4" th:each="p : ${peliculas}">
+                <div class="card h-100">
+                    <img th:src="@{'https://image.tmdb.org/t/p/w500/' + ${p.poster_path}}" 
+                         class="card-img-top" alt="Poster de la película">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${p.title}"></h5>
+                        <p class="card-text" th:text="${p.overview}"></p>
+                        <form th:action="@{'/favoritos/agregar/' + ${p.id}}" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm">Agregar a favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
