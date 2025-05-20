@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultra.net.nz/thyemeleaf/layout"
+    layout:decorate=~{layout}>
+
+<head>
+    <title>Peliculas</title>
+</head>
+
+<body layout:fragment="body" class="bg-light">
+    <div class="container mt-4">
+        <h1 class="mb-4">Películas Populares</h1>
+        <div class="row">
+            <!-- Tarjeta de ejemplo estática para Rápidos y Furiosos -->
+            <ul>
+                <li th:each="pelicula : ${peliculas}">
+                    <span th:text="${pelicula['title']}"></span>
+                </li>
+            </ul>
+
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://www.themoviedb.org/t/p/w1280/9OYC68a3NH5ySyTBjLQDzxhApMi.jpg" class="card-img-top"
+                        alt="Poster de Rápidos y Furiosos">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rápidos y Furiosos</h5>
+                        <p class="card-text" style="flex-grow: 1;">
+                            Shaun Boswell es un chico que no acaba de encajar en ningún grupo. En el instituto es un solitario, 
+                            su única conexión con el mundo de indiferencia que le rodea es a través de las carreras ilegales, 
+                            lo que no le ha convertido en el chico favorito de la policía. 
+                            Cuando amenazan con encarcelarle, le mandan fuera del país a pasar una temporada con su tío, un militar destinado en Japón, 
+                            que vive en un diminuto piso en un barrio barato de Tokio. 
+                        </p>
+                        <form action="#" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-auto">Agregar a
+                                favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://www.themoviedb.org/t/p/w1280/9OYC68a3NH5ySyTBjLQDzxhApMi.jpg" class="card-img-top"
+                        alt="Poster de Rápidos y Furiosos">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rápidos y Furiosos</h5>
+                        <p class="card-text" style="flex-grow: 1;">
+                            Shaun Boswell es un chico que no acaba de encajar en ningún grupo. En el instituto es un solitario, 
+                            su única conexión con el mundo de indiferencia que le rodea es a través de las carreras ilegales, 
+                            lo que no le ha convertido en el chico favorito de la policía. 
+                            Cuando amenazan con encarcelarle, le mandan fuera del país a pasar una temporada con su tío, un militar destinado en Japón, 
+                            que vive en un diminuto piso en un barrio barato de Tokio. 
+                        </p>
+                        <form action="#" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-auto">Agregar a
+                                favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://www.themoviedb.org/t/p/w1280/9OYC68a3NH5ySyTBjLQDzxhApMi.jpg" class="card-img-top"
+                        alt="Poster de Rápidos y Furiosos">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rápidos y Furiosos</h5>
+                        <p class="card-text" style="flex-grow: 1;">
+                            Shaun Boswell es un chico que no acaba de encajar en ningún grupo. En el instituto es un solitario, 
+                            su única conexión con el mundo de indiferencia que le rodea es a través de las carreras ilegales, 
+                            lo que no le ha convertido en el chico favorito de la policía. 
+                            Cuando amenazan con encarcelarle, le mandan fuera del país a pasar una temporada con su tío, un militar destinado en Japón, 
+                            que vive en un diminuto piso en un barrio barato de Tokio. 
+                        </p>
+                        <form action="#" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-auto">Agregar a
+                                favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://www.themoviedb.org/t/p/w1280/9OYC68a3NH5ySyTBjLQDzxhApMi.jpg" class="card-img-top"
+                        alt="Poster de Rápidos y Furiosos">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rápidos y Furiosos</h5>
+                        <p class="card-text" style="flex-grow: 1;">
+                            Shaun Boswell es un chico que no acaba de encajar en ningún grupo. En el instituto es un solitario, 
+                            su única conexión con el mundo de indiferencia que le rodea es a través de las carreras ilegales, 
+                            lo que no le ha convertido en el chico favorito de la policía. 
+                            Cuando amenazan con encarcelarle, le mandan fuera del país a pasar una temporada con su tío, un militar destinado en Japón, 
+                            que vive en un diminuto piso en un barrio barato de Tokio. 
+                        </p>
+                        <form action="#" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-auto">Agregar a
+                                favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://www.themoviedb.org/t/p/w1280/9OYC68a3NH5ySyTBjLQDzxhApMi.jpg" class="card-img-top"
+                        alt="Poster de Rápidos y Furiosos">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rápidos y Furiosos</h5>
+                        <p class="card-text" style="flex-grow: 1;">
+                            Shaun Boswell es un chico que no acaba de encajar en ningún grupo. En el instituto es un solitario, 
+                            su única conexión con el mundo de indiferencia que le rodea es a través de las carreras ilegales, 
+                            lo que no le ha convertido en el chico favorito de la policía. 
+                            Cuando amenazan con encarcelarle, le mandan fuera del país a pasar una temporada con su tío, un militar destinado en Japón, 
+                            que vive en un diminuto piso en un barrio barato de Tokio. 
+                        </p>
+                        <form action="#" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-auto">Agregar a
+                                favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://www.themoviedb.org/t/p/w1280/9OYC68a3NH5ySyTBjLQDzxhApMi.jpg" class="card-img-top"
+                        alt="Poster de Rápidos y Furiosos">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rápidos y Furiosos</h5>
+                        <p class="card-text" style="flex-grow: 1;">
+                            Shaun Boswell es un chico que no acaba de encajar en ningún grupo. En el instituto es un solitario, 
+                            su única conexión con el mundo de indiferencia que le rodea es a través de las carreras ilegales, 
+                            lo que no le ha convertido en el chico favorito de la policía. 
+                            Cuando amenazan con encarcelarle, le mandan fuera del país a pasar una temporada con su tío, un militar destinado en Japón, 
+                            que vive en un diminuto piso en un barrio barato de Tokio. 
+                        </p>
+                        <form action="#" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-auto">Agregar a
+                                favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
