@@ -1,5 +1,7 @@
 package com.Digis01FArceConsumoApiTMDB.Controller;
 
+import com.Digis01FArceConsumoApiTMDB.ML.ResultLogin;
+import com.Digis01FArceConsumoApiTMDB.ML.SessionDTO;
 import com.Digis01FArceConsumoApiTMDB.ML.Usuario;
 import jakarta.servlet.http.HttpSession;
 import java.lang.reflect.ParameterizedType;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
@@ -96,7 +99,7 @@ public class UsuarioController {
 
             session.setAttribute("Account ID obtenido: ", accountId);
 
-            return "redirect:/Usuario/peliculas"; // Redirige a la vista de películas populares
+            return "redirect:/Usuario/validarSession"; // Redirige a la vista de películas populares
         } catch (Exception ex) {
             System.err.println("Error durante el login con TMDB: " + ex.getLocalizedMessage());
             ex.printStackTrace();
@@ -105,8 +108,8 @@ public class UsuarioController {
 
     }
 
-    @GetMapping("/peliculas")
-    public String Peliculas(HttpSession session) {
+    @GetMapping("/validarSession")
+    public String ValidarSession(HttpSession session) {
         String sessionId = (String) session.getAttribute("sessionid");
 
         if (sessionId != null && !sessionId.isEmpty()) {
@@ -115,16 +118,17 @@ public class UsuarioController {
             System.out.println("No se encontró una sesión activa.");
         }
 
-        return "/verFavoritas";
+        return "redirect:/Usuario/verFavoritas";
     }
 
-    @GetMapping("/verFavoritas")
+    @GetMapping("verFavoritas")
     public String verFavoritas(HttpSession session, Model model) {
         String sessionId = (String) session.getAttribute("sessionid");
         String accountId = (String) session.getAttribute("accountid");
 
         if (sessionId == null || accountId == null) {
             System.out.println("No hay sesión iniciada.");
+            // mandar una alerta
             return "redirect:/Usuario";
         }
 
@@ -147,4 +151,66 @@ public class UsuarioController {
         return "favoritas"; // necesitas crear favoritas.html
     }
 
+    @GetMapping("/populares")
+    public String Populares(Model model) {
+        return "populares";
+    }
+
+    @GetMapping("/masPopular")
+    public String verPopulares(Model model) {
+        //String sessionId = (String) session.getAttribute("sessionid");
+        //String accounId = (String) session.getAttribute("accoutid");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", BearerKey);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<Map> response = restTemplate.exchange(
+                "https://api.themoviedb.org/3/movie/popular",
+                HttpMethod.GET,
+                entity,
+                Map.class);
+
+        List<Map<String, Object>> peliculas = (List<Map<String, Object>>) response.getBody().get("results");
+
+        model.addAttribute("peliculas", peliculas);
+        return "populares";
+
+    }
+
+    @GetMapping("/logout")
+    public String CerrarSession(HttpSession session, Model model) {
+        String sessionId = (String) session.getAttribute("sessionid");
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", BearerKey);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            //SessionDTO sessionDTO = new SessionDTO(sessionId);
+
+            //HttpEntity<SessionDTO> entity = new HttpEntity<>(sessionDTO, headers);
+
+            ResponseEntity<ResultLogin> deleteSession = restTemplate.exchange(
+                    "https://api.themoviedb.org/3/authentication/session",
+                    HttpMethod.DELETE,
+                    HttpEntity.EMPTY,
+                    new ParameterizedTypeReference<ResultLogin>() {
+            });
+
+            if (deleteSession.getStatusCode().is2xxSuccessful()) {
+                session.invalidate();
+                return "redirect:/Index";
+            }
+
+        } catch (HttpStatusCodeException ex) {
+            model.addAttribute("status", ex.getLocalizedMessage());
+            model.addAttribute("message", ex.getLocalizedMessage());
+            return "ErrorPage";
+        }
+
+        return "Index";
+    }
 }

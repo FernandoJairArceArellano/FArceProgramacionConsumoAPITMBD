@@ -19,24 +19,49 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/Usuario}">Risosu IT</a>
+        <a class="navbar-brand" th:href="@{/Usuario}">TMBD API</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" th:href="@{/Usuario/peliculas}">Peliculas</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/Usuario/CargaMasiva}">Link 2</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/Usuario/masPopular}">Mas populares</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/Usuario/verFavoritas}">Peliculas favoritas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Navbar</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
+<div class="d-flex align-items-center flex-column flex-md-row gap-2 justify-content-end p-3">
+    <button class="btn btn-primary btn-action">Iniciar Sesion</button>
+    <button class="btn btn-warning btn-action">Cerrar Sesion</button>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Idioma
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item active" href="#">Idioma por defecto</a></li>
+            <li><a class="dropdown-item" href="#">For each de todos los idiomas</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+    </div>
+</div>
+
+
 <body layout:fragment="body">
 
     <section class="vh-100">
         <div class="container h-100">
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Error!</strong> Este mensaje se mostrarar si ocurre un error en el incio de sesion.
+            </div>
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <!-- Columna de imagen -->
                 <div class="col-md-6 col-lg-5 mb-4 mb-lg-0">
@@ -53,12 +78,14 @@
                         <form th:action="@{/Usuario/login}" th:object="${usuario}" method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de Usuario</label>
-                                <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="Usuario" required>
+                                <input type="text" class="form-control" th:field="*{username}" id="username"
+                                    placeholder="Usuario" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Contraseña</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Contraseña">
+                                    <input type="password" class="form-control" th:field="*{password}" id="password"
+                                        placeholder="Contraseña">
                                     <button class="btn btn-outline-secondary toggle-password" type="button"
                                         data-toggle="password" required>
                                         <i class="bi bi-eye"></i>
@@ -69,7 +96,8 @@
                             <div class="mb-3">
                                 <label for="apiKey" class="form-label">Api Key</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="apiKey" placeholder="Api Key" disabled>
+                                    <input type="password" class="form-control" id="apiKey" placeholder="Api Key"
+                                        disabled>
                                     <button class="btn btn-outline-secondary toggle-password" type="button"
                                         data-toggle="apiKey">
                                         <i class="bi bi-eye"></i>

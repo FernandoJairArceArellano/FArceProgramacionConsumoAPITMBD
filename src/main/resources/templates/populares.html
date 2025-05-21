@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultra.net.nz/thyemeleaf/layout"
+    layout:decorate=~{layout}>
+
+<head>
+    <title>Peliculas más populares</title>
+</head>
+
+<body layout:fragment="body" class="bg-light">
+    <div class="container mt-3">
+        <h1 class="mb-4">Películas Populares</h1>
+
+        <div class="row row-cols-2 row-cols-md-5 g-4">
+            <div class="col" th:each="movie : ${peliculas}">
+                <div class="card h-100 rounded-top">
+                    <img th:src="|https://image.tmdb.org/t/p/w500${movie.poster_path}|" class="card-img-top">
+                    <div class="card-body ">
+                        <h3 class="card-title" th:text="${movie.title}"></h3>
+                        <div class="d-flex">
+                            Lanzamiento 
+                            <p class="card-text" style="flex-grow: 1;" th:text="${movie.release_date}"></p>
+                            Idioma Original
+                            <p class="card-text" style="flex-grow: 1;" th:text="${movie.original_language}"></p>
+                        </div>
+                        <div class="form-container">
+                            <form action="#" method="post">
+                                <div class="d-flex align-items-center flex-column flex-md-row gap-2 justify-content-end">
+                                    <a class="btn btn-lg btn-action" href="#"><i class="bi bi-share-fill"></i></a>
+                                    <a class="btn btn-lg btn-action" href="#"><i class="bi bi-star"></i></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
