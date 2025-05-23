@@ -8,34 +8,55 @@
 </head>
 
 <body layout:fragment="body" class="bg-light">
-    <div class="container mt-3">
-        <h1 class="mb-4">Películas Populares</h1>
+    <!-- Container movies -->
+    <div class="container-fluid mt-3 w-75 mx-auto">
+        <!-- Titulo -->
+        <h1 class="mb-4 text-center text-md-start">Películas Populares</h1>
 
-        <div class="row row-cols-2 row-cols-md-5 g-4">
+        <!-- Grid de películas -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+            <!-- Tarjeta por cada película -->
             <div class="col" th:each="movie : ${peliculas}">
-                <div class="card h-100 rounded-top">
-                    <img th:src="|https://image.tmdb.org/t/p/w500${movie.poster_path}|" class="card-img-top">
-                    <div class="card-body ">
-                        <h3 class="card-title" th:text="${movie.title}"></h3>
-                        <div class="d-flex">
-                            Lanzamiento 
-                            <p class="card-text" style="flex-grow: 1;" th:text="${movie.release_date}"></p>
-                            Idioma Original
-                            <p class="card-text" style="flex-grow: 1;" th:text="${movie.original_language}"></p>
-                        </div>
-                        <div class="form-container">
-                            <form action="#" method="post">
-                                <div class="d-flex align-items-center flex-column flex-md-row gap-2 justify-content-end">
-                                    <a class="btn btn-lg btn-action" href="#"><i class="bi bi-share-fill"></i></a>
-                                    <a class="btn btn-lg btn-action" href="#"><i class="bi bi-star"></i></a>
+                <div class="card h-100 rounded-top shadow-sm position-relative">
+                    <!-- Enlace envolviendo imagen y detalles -->
+                    <a th:href="@{'/pelicula/' + ${movie.id}}" class="text-decoration-none text-dark">
+                        <!-- Imagen -->
+                        <img th:src="|https://image.tmdb.org/t/p/w500${movie.poster_path}|"
+                            class="card-img-top img-fluid" style="height: auto; width: 100%;">
+
+                        <!-- Información -->
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title text-truncate" th:text="${movie.title}" title="[[${movie.title}]]">
+                            </h4>
+
+                            <!-- Fecha e idioma -->
+                            <div class="d-flex justify-content-center align-items-center w-100 gap-4 mb-3">
+                                <div class="d-flex flex-column text-center">
+                                    <span class="small text-muted">Lanzamiento</span>
+                                    <p class="card-text mb-0" th:text="${movie.release_date}"></p>
                                 </div>
-                            </form>
+                                <div class="d-flex flex-column text-center">
+                                    <span class="small text-muted">Idioma Original</span>
+                                    <p class="card-text mb-0" th:text="${movie.original_language}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Botones de acción -->
+                    <div class="card-footer bg-transparent border-0 d-flex justify-content-center gap-3 pb-3">
+                        <div class="d-flex justify-content-center gap-3">
+                            <a class="btn btn-sm btn-outline-secondary" href="#">
+                                <i class="bi bi-share-fill"></i></a>
+                            <a class="btn btn-sm btn-outline-warning" href="#">
+                                <i class="bi bi-star"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
